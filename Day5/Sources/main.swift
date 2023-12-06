@@ -86,16 +86,20 @@ struct Almanac {
     }
 }
 
-let maps = chunks.reduce(into: [Map]()) { partialResult, chunk in
-    let transformers = chunk
-        .split(separator: "\n")
-        .dropFirst()
-        .map(Transformer.init)
-        .sorted()
-    partialResult.append(.init(transformers: transformers))
+extension Almanac {
+    init(chunks: [Substring]) {
+        self.maps = chunks.reduce(into: [Map]()) { partialResult, chunk in
+            let transformers = chunk
+                .split(separator: "\n")
+                .dropFirst()
+                .map(Transformer.init)
+                .sorted()
+            partialResult.append(.init(transformers: transformers))
+        }
+    }
 }
 
-let almanac = Almanac(maps: maps)
+let almanac = Almanac(chunks: chunks)
 
 var date = Date()
 print("part 1: \(almanac.lowestLocation(seeds: seeds)), time: \(-date.timeIntervalSinceNow)")
