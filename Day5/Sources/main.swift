@@ -1,5 +1,4 @@
 import Foundation
-import Parsing
 
 let url = Bundle.module.url(forResource: "Input", withExtension: nil)!
 var chunks = try String(contentsOf: url).split(separator: "\n\n")
